@@ -18,19 +18,19 @@ The final model uses **Poisson Regression** to predict values for each flare cla
 
 # Model Development
 
---> **Exploratory Data Analysis**
+- **Exploratory Data Analysis**
 
 The data used is from the *UCI Machine Learning Repository*, describing the various features of a sunspot and how these translated to **common**, **moderate** and **severe** solar flares. Having 3 target classes was a point of challenge, which I was able to acknowledge whilst having to choose models to train. The model contained features that were not numerical - modified Zurich class, largest spot size and spot distribution, classed by letter according to scientific classifications. Initially, I decided to map the values to corresponding integers, as these categories seemed somewhat ranked in intensity of a solar flare. However, after training several models, the scores produced were questionable, as models tend to see mapped integers as having a linear relationship, which was not exactly true for sunspot classification. Hence, I switched my approach to using one-hot encoding, despite the increase in the number of columns.
 
--->  **Model Training and Testing**
+-  **Model Training and Testing**
 
 My initial thoughts were to compare the performance of three sklearn models to be able to choose the most accurate one, after hyperparameter tuning. I had chosen the *RandomForestRegressor*, *RidgeRegression* and *KNearestRegressor* models, due to their capabilities in handling multi-output regression. I used *GridSearchCV* for RandomForest and KNearestResgressor, and RidgeCV for RidgeRegression to tune and cross validate for the best set of hyperparameters for each model. One challenge faced here was the presence of memory issues, where not every hyperparameter was tuned, and kernal crashes meant that I had to leave out some hyperparameters. These were scored based on the negative mean squared error. I fit each tuned model to the training data. Surprisingly, all three models had a very similar mean squared error of *-0.48 to -0.51*. This level of similarity was also the case when testing the model on the test dataset, with both the mean squared error and mean absolute error (results in notebook). I decided to choose the RidgeRegressor due to it having a very slightly lower MAE than the others, choosing it over RandomForest due to its speed. 
 
--->  **Streamlit frontend**
+-  **Streamlit frontend**
 
 I decided to use Streamlit for the frontend interface due to its simplicity and ability to integrate to a FastAPI backend. I used dropdown boxes for user input to prevent validation errors, ensuring that the input is consistent with the formats expected by the model. 
 
--->  **FastAPI backend**
+-  **FastAPI backend**
 
 I used a *POST* request to send data from the frontend to the backend for the model to use. This involved various challenges such as formatting errors with column names, leading to the use of aliases to match variable names in the Pydantic Basemodel. Another source of challenge was being able to return the predicted DataFrame from the endpoint, where the format had to be manipulated to return the details to the user. 
 
