@@ -3,7 +3,7 @@ fastapi==0.128.0
 scikit-learn==1.6.1
 pandas==2.3.1
 pydantic==2.11.7
-streamlit==1.48.7
+streamlit==1.48.0
 requests==2.32.4
 seaborn==0.13.2
 matplotlib==3.10.0 
