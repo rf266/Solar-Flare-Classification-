@@ -31,7 +31,7 @@ class Input(BaseModel):
     spot_distribution_O :bool = Field(alias="spot distribution_O")
     spot_distribution_X :bool = Field(alias="spot distribution_X")
 
-@app.post("/")
+@app.post("https://end-to-end-solar-flare-regression-model.onrender.com/")
 def predict(data:Input):
     model = joblib.load("poisson_model.pkl")
     newdata = data.model_dump(by_alias=True)

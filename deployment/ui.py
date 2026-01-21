@@ -158,7 +158,7 @@ inputs= {
         }
 
 if submit:
-    req = requests.post("http://127.0.0.1:8000/", json=inputs)
+    req = requests.post("https://end-to-end-solar-flare-regression-model.onrender.com/", json=inputs)
     preds = req.json()
     commonf = preds["common flares"]['0']
     moderate = preds["moderate flares"]['0']
@@ -171,4 +171,6 @@ if submit:
     st.write(f"Severe Flares: {severe:.5f}")
 
     st.write("Variable information: UCI Machine Learning Repository - https://archive.ics.uci.edu/dataset/89/solar+flare")
+
+
 
